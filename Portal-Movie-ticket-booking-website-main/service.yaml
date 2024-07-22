@@ -1,0 +1,14 @@
+# service.yaml (обновленный)
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  selector:
+    app: myapp
+    version: blue # поменяйте на green, когда будете переключать версии
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

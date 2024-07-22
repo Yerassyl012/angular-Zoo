@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'auth/error.html' %}
+<section>
+    <h2>&nbsp;&nbsp;Наши фильмы&nbsp;&nbsp;</h2>
+    {% include 'movies_horizontal.html' %}
+</section>
+<section>
+    <h2>&nbsp;&nbsp;Сегодняшние сеансы&nbsp;&nbsp;</h2>
+    {% if today_projections | length > 0 %}
+    {% set projections = today_projections %}
+    {% include 'projections_table.html' %}
+    {% else%}
+    <p style="text-align: center">НА СЕГОДНЯШНИЙ ДЕНЬ СЕАНСОВ НЕТ</p>
+    {% endif %}
+</section>
+<section>
+    <h2>&nbsp;&nbsp;Скоро&nbsp;&nbsp;</h2>
+    {% if next_projections | length > 0 %}
+    {% set projections = next_projections %}
+    {% include 'projections_table.html' %}
+    {% else%}
+    <p style="text-align: center">В БЛИЖАЙШЕЕ ВРЕМЯ НИКАКИХ СЕАНСОВ НЕТ</p>
+    {% endif %}
+</section>
+{% endblock %}

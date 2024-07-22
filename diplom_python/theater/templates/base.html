@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Portal</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cinema.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div>
+            <img src="{{ url_for('static', filename='images/image.png') }}" width="3" height="3">
+
+            {% if current_user.is_authenticated: %}
+            {% if current_user.role == current_user.role.__class__.manager %}
+            <a href="{{ url_for('main.index') }}">Главная</a>
+            <a href="{{ url_for('manager.reservations') }}">Бронирование</a>
+            <a href="{{ url_for('manager.schedule') }}">Проекции</a>
+            <a href="{{ url_for('auth.logout') }}">Выйти</a>
+            {% elif current_user.role == current_user.role.__class__.customer %}
+            <a href="{{ url_for('main.index') }}">Главная</a>
+            <a href="{{ url_for('main.user') }}">Профиль</a>
+            <a href="{{ url_for('main.reservation')}}">Купить билет</a>
+            <a href="{{ url_for('auth.logout') }}">Выйти</a>
+            {% endif %}
+            {% else %}
+            <a href="{{ url_for('main.index') }}">Главная</a>
+            <a href="{{ url_for('auth.signup') }}">Регистрация</a>
+            <a href="{{ url_for('auth.login') }}">Войти</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <section class="content">
+        {% block content %}{% endblock %}
+    </section>
+
+    <!-- <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.3.0/dist/sweetalert2.all.min.js"></script> --->
+    <script type=text/javascript src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type=text/javascript src="{{url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

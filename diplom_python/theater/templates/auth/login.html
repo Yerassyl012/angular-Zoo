@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class='form'>
+    <h2>&nbsp;&nbsp;Логин&nbsp;&nbsp;</h2>
+
+    {% include 'auth/error.html' %}
+
+    <form action="{{ url_for('auth.login') }}" method="post">
+        <div><label>Email<br><input type="email" name="email" placeholder="Enter email..." required /></label></div>
+        <div><label><br>Пароль<br><input type="password" name="password" placeholder="Enter password..."
+                    required /></label></div>
+        <div><label><br>Повтор<br><input type="password" name="password_repeat" placeholder="Enter password..."
+                    required /></label></div>
+        <div><input class='submit' type="submit" value="Login" /></div>
+        <div>У вас нет аккаунта? <a href="{{ url_for('auth.signup') }}" style="color:rgb(185, 31, 108)">Регистрация</a>
+        </div>
+    </form>
+
+</section>
+
+{% endblock %}

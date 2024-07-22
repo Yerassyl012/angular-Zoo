@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: theater-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: theater-app
+  template:
+    metadata:
+      labels:
+        app: theater-app
+    spec:
+      containers:
+      - name: theater-app
+        image: theater-app:latest
+        ports:
+        - containerPort: 5000

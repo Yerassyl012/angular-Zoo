@@ -1,0 +1,7 @@
+# configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myapp-config
+data:
+  DATABASE_URL: "postgres://user:password@hostname:5432/dbname"

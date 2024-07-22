@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'auth/error.html' %}
+{% if projection != None %}
+<section class='form'>
+    <h2>&nbsp;&nbsp;Купить билет&nbsp;&nbsp;</h2>
+    <form action="{{ url_for('main.reservation_post') }}" method="post">
+
+        <div><img id="movie_image" src={{projection.movie.img}} width=10 style="border-radius: 15px;"></div>
+        <label><br>{{projection.movie.title}}<br></label>
+        <div><select id="projection" name="projection" onchange='interactiveForm();'>
+                {% for proj in projections %}
+                {% if proj.id == projection.id %}
+                <option value="{{proj.id}}" selected><b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}}
+                    Time:{{proj.time.strftime('%H:%M')}} Экран: {{proj.screen.name}}</option>
+                {% else %}
+                <option value="{{proj.id}}"><b></b>Day:</b>{{proj.day.strftime('%d-%m-%Y')}}
+                    Time:{{proj.time.strftime('%H:%M')}} Экран: {{proj.screen.name}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div id="more-seats">
+            <div><label><br>Количество посадочных мест<br></label>
+                <select id="seats" name="seats" onchange='Price();'>
+                    <option id="option-seats" value="1" selected>1</option>
+                </select>
+            </div>
+            <br>
+
+            <div><a id="price"></a></div>
+            <div><input class='submit' type="submit" value="Buy" /></div>
+        </div>
+
+        <div id="no-more-seats">
+            <p>СВОБОДНЫХ МЕСТ БОЛЬШЕ НЕТ. ПРОВЕРЬТЕ ВСЕ ВАРИАНТЫ.</p>
+        </div>
+
+    </form>
+
+</section>
+{% endif %}
+
+<section class="movie-projections">
+    <h2>&nbsp;&nbsp;See All Options&nbsp;&nbsp;</h2>
+    {% if projections | length > 0 %}
+    {% include 'projections_table.html' %}
+    {% else%}
+    <p style="text-align: center">В БЛИЖАЙШЕЕ ВРЕМЯ {{projection.movie.title | upper}} СЕАНСОВ НЕТ</p>
+    {% endif %}
+</section>
+
+{% endblock %}

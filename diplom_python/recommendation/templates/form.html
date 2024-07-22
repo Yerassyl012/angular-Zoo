@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendation</title>
+</head>
+<body>
+    <h1>Введите информацию для рекомендации фильмов</h1>
+    <form action="/recommend" method="post">
+        <label>Темперамент:</label>
+        <input type="text" name="temperament" required><br>
+        <label>Дата и время:</label>
+        <input type="text" name="date" required><br>
+        <label>Возраст:</label>
+        <input type="number" name="age" required><br>
+        <label>Пол:</label>
+        <input type="text" name="gender" required><br>
+        <input type="submit" value="Получить рекомендации">
+    </form>
+</body>
+</html>
